@@ -29,10 +29,9 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
     [],
-    name='roop-pdfmd-bin',
+    exclude_binaries=True,
+    name='roop-pdfmd',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -54,5 +53,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='roop-pdfmd-bin',
+    name='roop-pdfmd',
 )

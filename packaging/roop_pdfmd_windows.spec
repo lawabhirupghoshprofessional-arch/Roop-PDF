@@ -29,9 +29,8 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
     [],
+    exclude_binaries=True,
     name='roop-pdfmd',
     debug=False,
     bootloader_ignore_signals=False,
