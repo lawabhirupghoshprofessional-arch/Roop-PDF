@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "roop-pdfmd"
+version = "0.2.0"
+description = "Offline PDF to Markdown/TXT desktop app with OCR fallback"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Roop PDFMD Contributors" }
+]
+dependencies = [
+  "PySide6>=6.7,<6.10",
+  "PyMuPDF>=1.24,<1.27",
+  "pytesseract>=0.3.10,<0.4",
+  "Pillow>=10.3,<12"
+]
+
+[project.scripts]
+roop-pdfmd = "roop_pdfmd.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/roop_pdfmd"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-q"
+testpaths = ["tests"]
+pythonpath = ["src"]
