@@ -85,6 +85,25 @@ Windows PowerShell:
 
 Artifacts are created under `dist/`.
 
+## CI Artifacts
+
+- Each push/PR to `main` runs GitHub Actions CI on Linux and Windows.
+- To download build outputs:
+  1. Open the repository **Actions** tab.
+  2. Open a workflow run (CI).
+  3. Download artifacts named `roop_pdfmd-ubuntu-latest` or `roop_pdfmd-windows-latest`.
+
+## Publish a Release
+
+Create and push a semantic version tag:
+
+```bash
+git tag v0.2.0
+git push origin v0.2.0
+```
+
+This triggers the release workflow to build both OS targets and publish a GitHub Release with zipped assets.
+
 ## Packaging Notes
 
 - v1 expects user-installed Tesseract.

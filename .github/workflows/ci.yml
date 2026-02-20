@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.11"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Upgrade pip
+        run: python -m pip install --upgrade pip
+
+      - name: Install project
+        run: pip install -e .
+
+      - name: Install test runner
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build (Windows spec)
+        if: runner.os == 'Windows'
+        run: pyinstaller packaging/roop_pdfmd_windows.spec
+
+      - name: Build (Linux spec)
+        if: runner.os == 'Linux'
+        run: pyinstaller packaging/roop_pdfmd_linux.spec
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: roop_pdfmd-${{ matrix.os }}
+          path: dist/**
