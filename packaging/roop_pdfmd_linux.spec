@@ -32,7 +32,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='roop-pdfmd',
+    name='roop-pdfmd-bin',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -54,5 +54,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='roop-pdfmd',
+    name='roop-pdfmd-bin',
 )
