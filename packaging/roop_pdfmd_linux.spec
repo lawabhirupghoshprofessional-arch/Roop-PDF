@@ -3,7 +3,9 @@
 from pathlib import Path
 
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
+ROOT_DIR = Path.cwd().resolve()
+if not (ROOT_DIR / 'src').exists() and (ROOT_DIR.parent / 'src').exists():
+    ROOT_DIR = ROOT_DIR.parent
 SRC_DIR = ROOT_DIR / 'src'
 ASSETS_DIR = ROOT_DIR / 'assets'
 ENTRYPOINT = SRC_DIR / 'roop_pdfmd' / '__main__.py'
